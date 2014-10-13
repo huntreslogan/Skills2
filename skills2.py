@@ -12,11 +12,13 @@ Bonus: do the same for a file (i.e. twain.txt)
 def count_unique(string1):
     my_list = string1.split()
     d = {}
-    i = 0
+    count = 1
     for item in my_list:
-    	key = item
-    	d[key] = i
-    	i += 1
+    	if item not in d:
+	    	d[item] = count
+    	else:
+    		d[item] += 1
+
     return d 
 
 print count_unique(string1) 
@@ -29,18 +31,18 @@ Given two lists, (without using the keywords 'if __ in ____' or the method 'inde
 return a list of all common items shared between both lists
 """
 def common_items(list1, list2):
-    in_common = []
-  
-    i = 0
+	
+	
 
-    for item in list1:
-    	if item == list2[i]:
-    		in_common.append(item)
-    		i += 1
 
-    return in_common
+  	
+  	in_common = list(set(list2).intersection(list1))
+
+	return in_common
 
 print common_items(list1, list2)
+    
+    
 
 
 
@@ -50,13 +52,40 @@ return a list of all common items shared between both lists. This time,
 use a dictionary as part of your solution.
 """
 def common_items2(list1, list2):
-    pass
+    d = {}
+    # looks for item from list1 in dictionary and if it finds it does nothing, else it sets value to 1
+    for item in list1:
+    	d[item] = d.get(item, 1)
+    # looks for an item from list2 in d and if it finds it adds 1 to its value, if it is not in d it adds to d and sets value to default 0 + 1
+    for item in list2:
+    	d[item] = d.setdefault(item, 0) + 1
+
+    in_common = []
+
+    for key,value in d.iteritems():
+    	if value >= 2:
+    		in_common.append(key)
+
+    return in_common
+
+print common_items2(list1, list2)
 
 """
 Given a list of numbers, return list of number pairs that sum to zero
 """
 def sum_zero(list1):
-    pass
+    d = {}
+    negs = []
+    for e in list1:
+    	neg_num = e * -1
+    	negs.append(neg_num)
+    d = dict(zip(list1, negs))
+    return d 
+
+print sum_zero(list1)
+
+
+
 
 """
 Given a list of words, return a list of words with duplicates removed
