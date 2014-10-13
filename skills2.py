@@ -10,14 +10,15 @@ the value
 Bonus: do the same for a file (i.e. twain.txt)
 """
 def count_unique(string1):
+	#take string and make into list of words called my_list
     my_list = string1.split()
+    #initialize dictionary
     d = {}
-    count = 1
-    for item in my_list:
-    	if item not in d:
-	    	d[item] = count
-    	else:
-    		d[item] += 1
+    # iterate through words in list
+    for word in my_list:
+    	#for each word, see if word is in d, if it is add 1 to its value
+    	#if not, key = word and value = 0 (default value), then add 1 to value
+    	d[word] = d.get(word, 0) + 1
 
     return d 
 
@@ -31,11 +32,8 @@ Given two lists, (without using the keywords 'if __ in ____' or the method 'inde
 return a list of all common items shared between both lists
 """
 def common_items(list1, list2):
-	
-	
-
-
-  	
+	#create set of unique unordered items(no duplicates) from list2 and use intersection to find values in common with list1
+	#create list of common values and call it in_common
   	in_common = list(set(list2).intersection(list1))
 
 	return in_common
@@ -53,17 +51,20 @@ use a dictionary as part of your solution.
 """
 def common_items2(list1, list2):
     d = {}
-    # looks for item from list1 in dictionary and if it finds it does nothing, else it sets value to 1
+    # looks for item from list1 in dictionary and if it finds it does nothing, else it sets value to 1, all of our keys in d have value 1 at this point
     for item in list1:
     	d[item] = d.get(item, 1)
-    # looks for an item from list2 in d and if it finds it adds 1 to its value, if it is not in d it adds to d and sets value to default 0 + 1
+    # looks to see if item in list2 is in d, and if it finds it adds 1 to its value, now we have some keys with a value > 1
+    #if it is not already in d it adds key to d and sets its value to default 0 + 1
     for item in list2:
+
     	d[item] = d.setdefault(item, 0) + 1
-
+    #initializes empty list for our items in common
     in_common = []
-
+    # iterates through d
+    #if the value for a key is equal to 2, we know that it is a duplicate, so we append it to in_common 
     for key,value in d.iteritems():
-    	if value >= 2:
+    	if value == 2:
     		in_common.append(key)
 
     return in_common
@@ -74,12 +75,20 @@ print common_items2(list1, list2)
 Given a list of numbers, return list of number pairs that sum to zero
 """
 def sum_zero(list1):
+	#initialize dictionary
     d = {}
+    #initialize list of negative values
     negs = []
-    for e in list1:
-    	neg_num = e * -1
+    # iterate throuh list1
+    #if 
+    for num in list1:
+    	#create temp var equal to number * -1
+    	neg_num = num * -1
+    	#append negative value to negs list
     	negs.append(neg_num)
+    #Take list of negative numbers and list1, zip together and create a dictionary with dict(), works if both lists are the same length
     d = dict(zip(list1, negs))
+    
     return d 
 
 print sum_zero(list1)
