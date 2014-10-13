@@ -88,7 +88,7 @@ def sum_zero(list1):
     	negs.append(neg_num)
     #Take list of negative numbers and list1, zip together and create a dictionary with dict(), works if both lists are the same length
     d = dict(zip(list1, negs))
-    
+
     return d 
 
 print sum_zero(list1)
@@ -102,14 +102,14 @@ Given a list of words, return a list of words with duplicates removed
 def find_duplicates(words):
 
 	duplicates = {}
-	#for each word in list words, uses get method to search for the word in duplicates
-	#if it finds the word it does not change the dictionary
+	#for each word in list words, uses get method to search for the word in duplicates dictionary
+	#if it finds the word it does not change the dictionary, this prevents our dictionary from having duplicate keys
 	#if it is not in the dictionary already, it adds the key and sets its value to 0
-	#keys() returns list of keys which are our words without the duplicates 
+	 
 	for word in words:
 		duplicates[word] = duplicates.get(word, 0)
 
-
+	#keys() returns list of keys which are our words without the duplicates
 	return duplicates.keys()
 
 print find_duplicates(words)
@@ -124,11 +124,18 @@ Bonus: print the words in alphabetical order in ascending order of length
 """
 def word_length(words):
     d = {}
-
+    #iterates through words and sets searches for length of word in dictionary
+    # if it is there nothing is changed
+    # if not already in dictionary will create key of word length and value is empty list
+    # if the length is already in the dictionary it just returns the empty list
     for word in words:
     	d[len(word)] = d.setdefault(len(word), [])
+    	#appends the word itself to the empty list we set as the value
+    	#now each value for word length is a list of words of that length
     	d[len(word)].append(word)
-    	
+    #we end up with a dictionary with the length as key and value as a list of words of that length
+    #next we take our dictionary and use items() to create a list of tuples that are equal to our word length in index 0 and our words with that length in index 1 i.e. [(1, ('I', 'I', 'a')), (2, ('am', 'to', 'is')) .....]
+    # to get the above order from 1 to 2 and so on, we have to sort our tuples, sorted() will sort by pairs[0], or our word length
     pairs = sorted(d.items())
     for pair in pairs:
     	for word in pair[1]:
