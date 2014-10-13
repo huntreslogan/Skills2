@@ -91,16 +91,21 @@ print sum_zero(list1)
 Given a list of words, return a list of words with duplicates removed
 """
 def find_duplicates(words):
-    non_dupes = []
-    
-    for word in words:
-    	if word not in non_dupes:
-    		non_dupes.append(word)
-    	else:
-    		pass
-    return non_dupes
+
+	duplicates = {}
+	#for each word in list words, uses get method to search for the word in duplicates
+	#if it finds the word it does not change the dictionary
+	#if it is not in the dictionary already, it adds the key and sets its value to 0
+	#keys() returns list of keys which are our words without the duplicates 
+	for word in words:
+		duplicates[word] = duplicates.get(word, 0)
+
+
+	return duplicates.keys()
 
 print find_duplicates(words)
+
+
 
 
 """
@@ -109,7 +114,19 @@ Bonus: do it on a file instead of the list provided
 Bonus: print the words in alphabetical order in ascending order of length
 """
 def word_length(words):
-    pass
+    d = {}
+
+    for word in words:
+    	d[len(word)] = d.setdefault(len(word), [])
+    	d[len(word)].append(word)
+    	
+    pairs = sorted(d.items())
+    for pair in pairs:
+    	for word in pair[1]:
+    		print word
+    
+
+print word_length(words)
 
 """
 Here's a table of English to Pirate translations
