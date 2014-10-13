@@ -91,7 +91,17 @@ print sum_zero(list1)
 Given a list of words, return a list of words with duplicates removed
 """
 def find_duplicates(words):
-    pass
+    non_dupes = []
+    
+    for word in words:
+    	if word not in non_dupes:
+    		non_dupes.append(word)
+    	else:
+    		pass
+    return non_dupes
+
+print find_duplicates(words)
+
 
 """
 Given a list of words, print the words in ascending order of length
